@@ -16,21 +16,6 @@ public class Tasks {
 		salaries = fmObj.fileReader(fileName);
 	}
 	
-	public void dataWriteOut() {
-		for (Entity entity : salaries) {
-			System.out.print(entity.getName());
-			System.out.print(";");
-			System.out.print(entity.getGender());
-			System.out.print(";");
-			System.out.print(entity.getDepartment());
-			System.out.print(";");
-			System.out.print(entity.getEntry());
-			System.out.print(";");
-			System.out.print(entity.getSalary());
-			System.out.println();
-		}
-	}
-	
 	public Integer howManyData() {
 		int workersNumber = 0;
 		for (Entity entity : salaries) {
@@ -78,70 +63,30 @@ public class Tasks {
 	}
 	
 	public void statistic() {
-		int beszerzes = 0;
-		int penzugy = 0;
-		int asztalosmuhely = 0;
-		int ertekesites = 0;
-		int lakatosmuhely = 0;
-		int karbantartas = 0;
-		int szerelomuhely = 0;
-		int szemelyzeti = 0;
-		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("beszerzés")) {
-				beszerzes++;
+		List<String> departs = new ArrayList<String>();
+		for (int i = 0; i < salaries.size(); i++) {
+			boolean isIn = false;
+			for (int j = 0; j < departs.size(); j++) {
+				if (salaries.get(i).getDepartment().equals(departs.get(j))) {
+					isIn = true;
+				}
+			}
+			if (isIn == false) {
+				departs.add(salaries.get(i).getDepartment());
 			}
 		}
-		System.out.println("beszerzés - "+beszerzes+" fõ");
 		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("pénzügy")) {
-				penzugy++;
+		int[] listHelp = new int[salaries.size()];
+		for (int i = 0; i < salaries.size(); i++) {
+			for (int j = 0; j < departs.size(); j++) {
+				if (salaries.get(i).getDepartment().equals(departs.get(j))) {
+					listHelp[j] ++;
+				}
 			}
 		}
-		System.out.println("penzügy - "+penzugy+" fõ");
-		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("asztalosmûhely")) {
-				asztalosmuhely++;
-			}
+		for (int i = 0; i <= listHelp.length; i++) {
+			System.out.println(departs.get(i) + " - "+ listHelp[i]);
 		}
-		System.out.println("asztalosmûhely - "+asztalosmuhely+" fõ");
-		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("értékesítés")) {
-				ertekesites++;
-			}
-		}
-		System.out.println("értékesítés - "+ertekesites+" fõ");
-		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("lakatosmûhely")) {
-				lakatosmuhely++;
-			}
-		}
-		System.out.println("lakatosmûhely - "+lakatosmuhely+" fõ");
-		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("karbantartás")) {
-				karbantartas++;
-			}
-		}
-		System.out.println("karbantartás - "+karbantartas+" fõ");
-		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("szerelõmûhely")) {
-				szerelomuhely++;
-			}
-		}
-		System.out.println("szerelõmûhely - "+szerelomuhely+" fõ");
-		
-		for (Entity entity : salaries) {
-			if (entity.getDepartment().equalsIgnoreCase("személyzeti")) {
-				szemelyzeti++;
-			}
-		}
-		System.out.println("személyzeti - "+szemelyzeti+" fõ");
 	}
 	
 	
