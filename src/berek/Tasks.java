@@ -84,7 +84,7 @@ public class Tasks {
 				}
 			}
 		}
-		for (int i = 0; i <= listHelp.length; i++) {
+		for (int i = 0; i < listHelp.length; i++) {
 			System.out.println(departs.get(i) + " - "+ listHelp[i]);
 		}
 	}
